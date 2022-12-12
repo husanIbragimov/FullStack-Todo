@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
 
@@ -25,11 +26,12 @@ SECRET_KEY = 'django-insecure-p=*^0spi=&i5e*hi6sx5e_h6%%7c0)-52aorlv$9vaj1!*ca%r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
 INSTALLED_APPS = [
+    # 'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,7 +46,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
 
     # local app(s)
-    'todoapp'
+    'todoapp',
 ]
 
 # allauth
@@ -69,7 +71,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'config.urls'
-
 
 TEMPLATES = [
     {
@@ -131,7 +132,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'Asia/Tashkent'
 
@@ -147,29 +148,52 @@ LANGUAGES = (
     ('uz', _('Uzbek')),
     ('ru', _('Russian')),
 )
+
+
 LOCALE_PATHS = [
-    BASE_DIR / 'local'
+    BASE_DIR / 'locale'
 ]
 
 MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
 
-MODELTRANSLATION_LANGUAGES = ('en', 'uz', 'ru')
+MODELTRANSLATION_LANGUAGE = ('uz', 'ru')
 
 MODELTRANSLATION_TRANSLATION_FILES = (
-    'todo.translation',
+    'todoapp.translator',
 )
+
+TRANSLATABLE_MODEL_MODULES = [
+    'todoapp.models'
+]
+
+PARLER_LANGUAGES = {
+    None: (
+        {'code': 'en', },  # English
+        {'code': 'uz', },  # Uzbek
+        {'code': 'ru', },  # Russian
+    ),
+    'default': {
+        'fallbacks': ['en'],
+        'hide_untranslated': False,
+    }
+}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 MEDIA_URL = '/media/'
+
 MEDIA_ROOT = BASE_DIR / 'media'
 
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

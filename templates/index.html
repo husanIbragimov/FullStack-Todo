@@ -1,26 +1,49 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h3>To Do List</h3>
-    <a type="button" class="btn btn-primary">News</a>
-    <a type="button" class="btn btn-info">Process</a>
-    <a type="button" class="btn btn-success">Completed</a>
-    <a type="button" class="btn btn-secondary">Canceled</a>
+    <h3 style="text-align: center;">To Do List</h3>
+    <br>
+{#    <h4>Status</h4>#}
+{#    <a href="?q=0" type="button" class="btn btn-primary me-2">News</a>#}
+{#    <a href="?q=1" type="button" class="btn btn-info me-2">Process</a>#}
+{#    <a href="?q=2" type="button" class="btn btn-success me-2">Completed</a>#}
+{#    <a href="?q=3" type="button" class="btn btn-secondary me-2">Canceled</a>#}
+{#    <br><br>#}
+{#    <h4>Priority</h4>#}
+{#    <a href="?p=0" type="button" class="btn btn-outline-primary me-2">None</a>#}
+{#    <a href="?p=1" type="button" class="btn btn-outline-dark me-2">Low</a>#}
+{#    <a href="?p=2" type="button" class="btn btn-outline-success me-2">Medium</a>#}
+{#    <a href="?p=3" type="button" class="btn btn-outline-secondary me-2">High</a>#}
 
-    <div class="todo-card mt-4">
+    <div class="filter-me">
+        <div class="filter-box">
+            <a href="?q=0" type="button" class="btn btn-primary me-2">News</a>
+            <a href="?q=1" type="button" class="btn btn-info me-2">Process</a>
+            <a href="?q=2" type="button" class="btn btn-success me-2">Completed</a>
+            <a href="?q=3" type="button" class="btn btn-secondary me-2">Canceled</a>
+        </div>
+        <div class="filter-box">
+            <a href="?p=0" type="button" class="btn btn-outline-primary me-2">None</a>
+            <a href="?p=1" type="button" class="btn btn-outline-info me-2">Low</a>
+            <a href="?p=2" type="button" class="btn btn-outline-warning me-2">Medium</a>
+            <a href="?p=3" type="button" class="btn btn-outline-danger me-2">High</a>
+        </div>
+    </div>
+
+    <div class="todo-card mt-4 mb-4">
         {% for todo in todos %}
             <div class="card mt-4">
                 <div class="card-header">
                     {{ todo.get_status_display }} - <small>last updated: {{ todo.updated_at }}</small>
                 </div>
-                <div class="card-body">
-                    <h5 class="card-title">{{ todo.title }}</h5>
-                    <p class="card-text">{{ todo.content }}</p>
-                    <a href="/edit/{{ todo.id }}/" class="btn btn-primary">Edit</a>
+                <div class="card-body cart-list">
+                    <h2 class="card-title cart-box">{{ todo.title }}</h2>
+                    <p class="card-text ">{{ todo.content }}</p>
+                    <a href="/edit/{{ todo.id }}/" class="btn btn-primary me-2">Edit</a>
                     <a href="/delete/{{ todo.id }}/" class="btn btn-danger">Delete</a>
                 </div>
                 <div class="card-footer text-muted">
-                   {{ todo.created_at }}
+                    {{ todo.created_at }}
                 </div>
             </div>
         {% endfor %}

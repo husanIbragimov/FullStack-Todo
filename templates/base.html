@@ -7,32 +7,44 @@
     <title>Todo list</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/style.css">
 
 </head>
 <body>
 
 {% include 'navbar.html' %}
 
-<div class="container pt-5">
- <p>{% trans 'There is no liability for harassment of journalists in Uzbekistan. Initiatives for setting liability have not been implemented for several years.' %}</p>
+<div class="container container-xl pt-3">
     {% get_current_language as CURRENT_LANGUAGE %}
-<h1>{{ CURRENT_LANGUAGE }}</h1>
+    {#    <h6>{{ CURRENT_LANGUAGE }}</h6>#}
     {% get_available_languages as AVAILABLE_LANGUAGES %}
-      {% get_language_info_list for AVAILABLE_LANGUAGES as languages %}
+    {% get_language_info_list for AVAILABLE_LANGUAGES as languages %}
 
-<div class="languages">
-        <p>{% trans "Language" %}:</p>
-        <ul class="languages">
-          {% for language in languages %}
-            <li>
-              <a href="/{{ language.code }}/"
-                {% if language.code == CURRENT_LANGUAGE %} class="active"{% endif %}>
-                {{ language.name_local }}
-              </a>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
+    <div class="languages">
+        <h4>{% trans "Language" %}: <span>{{ CURRENT_LANGUAGE }}</span></h4>
+        {% for language in languages %}
+
+            <p>
+                <a href="/{{ language.code }}/"
+                        {% if language.code == CURRENT_LANGUAGE %} class="active"{% endif %}>
+                    {{ language.name_local }}
+                </a>
+            </p>
+
+        {% endfor %}
+
+        {#        <select class="form-select" aria-label="Default select example">#}
+        {#            <option selected>{% trans "Language" %}:</option>#}
+        {#            {% for language in languages %}#}
+        {##}
+        {#                <option value="/{{ language.code }}/" {% if language.code == CURRENT_LANGUAGE %}#}
+        {#                        class="active"{% endif %}>{{ language.name_local }}#}
+        {#                </option>#}
+        {##}
+        {#            {% endfor %}#}
+        {#        </select>#}
+
+    </div>
     <div class="messages mt-4 mb-4">
         {% for message in messages %}
             {% if 'success' in message.tags %}

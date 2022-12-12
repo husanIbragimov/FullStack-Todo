@@ -10,8 +10,11 @@ def index(request):
     user = request.user
     todos = Todo.objects.filter(author=user).order_by('-updated_at')
     q = request.GET.get('q')
+    p = request.GET.get('p')
     if q:
         todos = todos.filter(status__exact=int(q))
+    if p:
+        todos = todos.filter(priority__exact=int(p))
     ctx = {
         'todos': todos
     }

@@ -129,7 +129,6 @@ dmypy.json
 .pyre/
 
 .idea
-static/
 allauth/
 todoapp/migrations
 venv

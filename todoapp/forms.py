@@ -8,13 +8,15 @@ class TodoForm(forms.ModelForm):
         super(TodoForm, self).__init__(*args, **kwargs)
         self.fields['title'].widget.attrs.update({
             'class': 'form-control',
-            'placeholder': 'title ...'
         })
         self.fields['content'].widget.attrs.update({
             'class': 'form-control',
-            'placeholder': 'content ...'
         })
         self.fields['status'].widget.attrs.update({
+            'class': 'form-control',
+        })
+
+        self.fields['priority'].widget.attrs.update({
             'class': 'form-control',
         })
 
