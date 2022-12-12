@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <p>If you put 'Yeah' button, you will delete this post. Are you sure?</p>
+        <button id="delete-article" type="submit" class="btn btn-danger">Yeah</button>
+        <a href="/" class="btn btn-primary">Not yet</a>
+    </form>
+{% endblock %}

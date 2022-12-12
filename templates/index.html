@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h3>To Do List</h3>
+    <a type="button" class="btn btn-primary">News</a>
+    <a type="button" class="btn btn-info">Process</a>
+    <a type="button" class="btn btn-success">Completed</a>
+    <a type="button" class="btn btn-secondary">Canceled</a>
+
+    <div class="todo-card mt-4">
+        {% for todo in todos %}
+            <div class="card mt-4">
+                <div class="card-header">
+                    {{ todo.get_status_display }} - <small>last updated: {{ todo.updated_at }}</small>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ todo.title }}</h5>
+                    <p class="card-text">{{ todo.content }}</p>
+                    <a href="/edit/{{ todo.id }}/" class="btn btn-primary">Edit</a>
+                    <a href="/delete/{{ todo.id }}/" class="btn btn-danger">Delete</a>
+                </div>
+                <div class="card-footer text-muted">
+                   {{ todo.created_at }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
