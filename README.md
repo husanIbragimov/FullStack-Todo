@@ -1,7 +1,7 @@
 # Todo-List
 Full Stack Python
 
-<img src="static/img/python_and_django.png" alt="django_project" width="300" height="300">
+<img src="static/img/python_and_django.png" alt="django_project" width="300" height="200">
 
 This was my old project and I decided to upload it on github
 
